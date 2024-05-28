@@ -1,108 +1,171 @@
-function login(event) {
-    event.preventDefault();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    // For now, we'll just log the user in without validation
-    if (username && password) {
-        showModeSelection();
-    } else {
-        alert('Please enter both username and password');
-    }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
 }
 
-function showModeSelection() {
-    document.getElementById('login-screen').classList.add('hidden');
-    document.getElementById('mode-selection-screen').classList.remove('hidden');
+#app {
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-function showLearnMode() {
-    document.getElementById('mode-selection-screen').classList.add('hidden');
-    document.getElementById('learn-mode-screen').classList.remove('hidden');
+.screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    transition: opacity 0.3s ease-in-out;
 }
 
-function showTeachMode() {
-    document.getElementById('mode-selection-screen').classList.add('hidden');
-    document.getElementById('teach-mode-screen').classList.remove('hidden');
+.hidden {
+    display: none;
 }
 
-function showFindTalentMode() {
-    document.getElementById('mode-selection-screen').classList.add('hidden');
-    document.getElementById('find-talent-mode-screen').classList.remove('hidden');
+#login-screen {
+    background-color: #FF6F61;
 }
 
-function showTeachers(skill) {
-    document.getElementById('learn-mode-screen').classList.add('hidden');
-    document.getElementById('teachers-screen').classList.remove('hidden');
-    
-    const teachersList = document.getElementById('teachers-list');
-    teachersList.innerHTML = ''; // Clear previous list
-    const teachers = [
-        { name: 'John Doe', skill: skill },
-        { name: 'Jane Smith', skill: skill },
-        { name: 'Sam Wilson', skill: skill }
-    ];
-
-    teachers.forEach(teacher => {
-        const li = document.createElement('li');
-        li.textContent = `${teacher.name} (${teacher.skill})`;
-        li.onclick = () => chatWithTeacher(teacher.name);
-        teachersList.appendChild(li);
-    });
+#dashboard-screen {
+    background-color: #6B5B95;
 }
 
-function showExperts(skill) {
-    document.getElementById('find-talent-mode-screen').classList.add('hidden');
-    document.getElementById('experts-screen').classList.remove('hidden');
-    
-    const expertsList = document.getElementById('experts-list');
-    expertsList.innerHTML = ''; // Clear previous list
-    const experts = [
-        { name: 'Alex Johnson', skill: skill },
-        { name: 'Emily Davis', skill: skill },
-        { name: 'Michael Brown', skill: skill }
-    ];
-
-    experts.forEach(expert => {
-        const li = document.createElement('li');
-        li.textContent = `${expert.name} (${expert.skill})`;
-        li.onclick = () => chatWithExpert(expert.name);
-        expertsList.appendChild(li);
-    });
+#mode-selection-screen {
+    background-color: #88B04B;
 }
 
-function chatWithTeacher(teacherName) {
-    alert(`Chat with ${teacherName}`);
+#learn-mode-screen {
+    background-color: #45A29E;
 }
 
-function chatWithExpert(expertName) {
-    alert(`Chat with ${expertName}`);
+#teach-mode-screen {
+    background-color: #D65076;
 }
 
-function uploadSkillVideo() {
-    alert('Upload skill video feature');
+#find-talent-mode-screen {
+    background-color: #FFA500;
 }
 
-function backToModeSelection() {
-    document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.add('hidden');
-    });
-    document.getElementById('mode-selection-screen').classList.remove('hidden');
+#teachers-screen {
+    background-color: #2E8B57;
 }
 
-function backToLearnMode() {
-    document.getElementById('teachers-screen').classList.add('hidden');
-    document.getElementById('learn-mode-screen').classList.remove('hidden');
+#experts-screen {
+    background-color: #8A2BE2;
 }
 
-function backToFindTalentMode() {
-    document.getElementById('experts-screen').classList.add('hidden');
-    document.getElementById('find-talent-mode-screen').classList.remove('hidden');
+#chat-screen {
+    background-color: #4682B4;
 }
 
-function logout() {
-    document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.add('hidden');
-    });
-    document.getElementById('login-screen').classList.remove('hidden');
+h1, h2 {
+    margin-bottom: 20px;
+    color: white;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"], input[type="password"], input[type="text"] {
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.primary-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.primary-btn:hover {
+    background-color: #0056b3;
+}
+
+.secondary-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.secondary-btn:hover {
+    background-color: #5a6268;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 10px;
+    margin: 5px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+ul li:hover {
+    background-color: #e0e0e0;
+}
+
+.skill-list li, .profile-list li, .message-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.skill-list li {
+    text-align: left;
+}
+
+.profile-list li, .message-list li {
+    justify-content: space-between;
+}
+
+.skill-list li::before, .profile-list li::before, .message-list li::before {
+    content: '•';
+    font-size: 20px;
+    color: #007bff;
+    margin-right: 10px;
+}
+
+.chat-box {
+    width: 100%;
+    height: 300px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: white;
 }
